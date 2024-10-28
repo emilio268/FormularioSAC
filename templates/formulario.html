@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Actualización</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lcv6W0qAAAAALVJQ-84jp7j6Xo4nzxLsCFDUKZC"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="img-background"></div>
+      
+      <div class="form-container">
+        <div class="mini-banner">
+          <img src="/static/img/logo.png" alt="Logo de la Empresa" />
+        </div>
+
+        
+        <form id="registroForm" action="/insertar-datos" method="post">
+            <h2>Actualizar Información</h2>
+            <div class="form-grid">
+                <div class="input-container short">
+                    <label for="tipo_documento">Tipo:</label>
+                    <select id="tipo_documento" name="tipo_documento" required>
+                        <option value="Cédula">CC</option>
+                        <option value="Pasaporte">Pas</option>
+                        <option value="Cédula de Extranjería">CE</option>
+                        <option value="Registro Civil">RC</option>
+                        <option value="Tarjeta de Identidad">TI</option>
+                    </select>
+                </div>
+
+                <div class="input-container long">
+                    <label for="numero_documento">Número de Documento:</label>
+                    <input type="text" id="numero_documento" name="numero_documento" required>
+                </div>
+
+                <div class="input-container medium">
+                    <label for="nombres">Nombres:</label>
+                    <input type="text" id="nombres" name="nombres" required>
+                </div>
+
+                <div class="input-container medium">
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellidos" required>
+                </div>
+
+                <div class="input-container full">
+                    <label for="correo_electronico">Correo Electrónico:</label>
+                    <input type="email" id="correo_electronico" name="correo_electronico" required>
+                </div>
+
+                <div class="input-container medium">
+                    <label for="telefono_celular">Teléfono Celular:</label>
+                    <input type="text" id="telefono_celular" name="telefono_celular" required>
+                </div>
+
+                <div class="input-container medium">
+                    <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                </div>
+            </div>
+            <button type="submit">Actualizar</button>
+
+            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+
+        </form>
+      </div>
+    </div>
+    <script>
+        grecaptcha.enterprise.ready(function() {
+            document.getElementById('registroForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const token = await grecaptcha.enterprise.execute('6Lcv6W0qAAAAALVJQ-84jp7j6Xo4nzxLsCFDUKZC', {action: 'LOGIN'});
+                document.getElementById('g-recaptcha-response').value = token;
+                this.submit(); // Enviar el formulario una vez que se haya asignado el token
+            });
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+  </body>
+</html>

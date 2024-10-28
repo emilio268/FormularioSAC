@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la ventana */
+    display: flex; /* Flex para alinear el formulario a la derecha */
+    justify-content: flex-end; /* Alinear el formulario a la derecha */
+}
+
+.img-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/static/img/background.jpeg");
+    background-size: cover;
+    background-position: center;
+    z-index: 1; /* Asegura que la imagen esté detrás del formulario */
+}
+
+.form-container {
+    position: relative;
+    z-index: 2; /* Asegura que el formulario esté frente a la imagen */
+    width: 40%; /* Ajusta el tamaño del formulario */
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.mini-banner {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.mini-banner img {
+    width: 120px;
+}
+
+h2 {
+    color: #2c3e50; /* Color verde oscuro */
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    width: 100%;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.short {
+    grid-column: span 2; /* Ancho para el tipo de documento */
+}
+
+.medium {
+    grid-column: span 5; /* Ancho para nombres, apellidos, teléfono, y fecha */
+}
+
+.long {
+    grid-column: span 7; /* Ancho para el número de documento */
+}
+
+.full {
+    grid-column: span 12; /* Ancho completo para correo electrónico */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: #2c3e50; /* Color verde oscuro */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    padding: 0.6rem;
+    border: 1px solid #2c3e50; /* Color borde verde oscuro */
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+select:focus {
+    outline: none;
+    border-color: #27ae60; /* Color verde brillante */
+    box-shadow: 0 0 5px rgba(39, 174, 96, 0.5); /* Sombra verde brillante al enfocar */
+}
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #27ae60; /* Color verde brillante */
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #219150; /* Color verde más oscuro al pasar el mouse */
+}
+
+.notification {
+    padding: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 768px) {
+    .form-container {
+        width: 90%; /* Aumentar el tamaño del formulario en pantallas más pequeñas */
+        padding: 1rem; /* Menos relleno en pantallas más pequeñas */
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(6, 1fr); /* Ajustar el número de columnas en pantallas más pequeñas */
+    }
+
+    .short {
+        grid-column: span 3; /* Ancho para el tipo de documento */
+    }
+
+    .medium,
+    .long,
+    .full {
+        grid-column: span 6; /* Ancho completo para otros campos */
+    }
+}
